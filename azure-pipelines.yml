@@ -31,9 +31,7 @@ jobs:
                --pxrusd-location "C:\Users\hamed\Desktop\USD2002" 
                --maya-location "C:\Program Files\Autodesk\Maya2021" 
                --devkit-location "C:\Users\hamed\Desktop\PR112_DEVKIT\devkitBase"  
-               --stages=configure,build,install 
-               --generator=Ninja 
-               --build-args=-DCMAKE_MAKE_PROGRAM=C:/ninja.exe 
+               --stages=configure,build,install
                $(InstallFolder)
 
        displayName: 'Run build script!'
