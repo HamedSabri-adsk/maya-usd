@@ -31,13 +31,13 @@ jobs:
                --pxrusd-location "C:\Users\hamed\Desktop\USD2002" 
                --maya-location "C:\Program Files\Autodesk\Maya2021" 
                --devkit-location "C:\Users\hamed\Desktop\PR112_DEVKIT\devkitBase"  
-               --stages=clean,configure,build,install,test,package
+               --stages=clean,configure,build,install
                --build-args="-DSKIP_USDMAYA_TESTS=ON,-DPXR_BUILD_TESTS=OFF"
                $(InstallFolder)
 
        displayName: 'Run build script!'
 
-     - script: 'ctest -C $(BuildType) -VV'
+     - script: 'ctest -j 4 -C $(BuildType) -VV'
        workingDirectory: $(BuildFolder)
        displayName: 'Run ctest!'
 
