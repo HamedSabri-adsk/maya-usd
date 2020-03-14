@@ -31,31 +31,15 @@ jobs:
                --pxrusd-location "C:\Users\hamed\Desktop\USD2002" 
                --maya-location "C:\Program Files\Autodesk\Maya2021" 
                --devkit-location "C:\Users\hamed\Desktop\PR112_DEVKIT\devkitBase"  
-               --stages=configure,build,install
+               --stages=clean,configure,build,install,test,package
+               --build-args="-DSKIP_USDMAYA_TESTS=ON,-DPXR_BUILD_TESTS=OFF"
                $(InstallFolder)
 
        displayName: 'Run build script!'
-     
-     # - task: DeleteFiles@1
-     #   inputs:
-     #     SourceFolder: '$(Build.BinariesDirectory)\install'
-     #     Contents: |
-     #       build
-     #       share
-     #       src
-     #       cmake
 
-     - task: ArchiveFiles@2
-       inputs:
-         rootFolderOrFile: '$(Build.BinariesDirectory)\install'
-         includeRootFolder: false
-         archiveType: 'zip'
-         archiveFile: '$(Build.ArtifactStagingDirectory)/MayaUSD-0.1.0-Windows.zip'
-         replaceExistingArchive: true
-         
-     - task: PublishBuildArtifacts@1
-       inputs:
-         PathtoPublish: '$(Build.ArtifactStagingDirectory)'
-         ArtifactName: 'MayaUSD-0.1.0'
-         publishLocation: 'Container'
-         parallel: true
+     # - task: PublishBuildArtifacts@1
+     #   inputs:
+     #     PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+     #     ArtifactName: 'MayaUSD-0.1.0'
+     #     publishLocation: 'Container'
+     #     parallel: true

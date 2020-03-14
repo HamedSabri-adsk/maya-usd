@@ -4,6 +4,10 @@ USD for Maya is a project to create a Maya plugin, as well as reusable libraries
 
 Read more about Pixar's USD [here](http://openusd.org)
 
+Build Status
+------------
+
+[![Build Status](https://dev.azure.com/hamedsabri/USD/_apis/build/status/HamedSabri-adsk.maya-usd%20(3)?branchName=azure_pipelines)](https://dev.azure.com/hamedsabri/USD/_build/latest?definitionId=44&branchName=azure_pipelines)
 
 ## Motivation
 *Why yet another Maya plugin?*
