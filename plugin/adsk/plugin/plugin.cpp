@@ -49,6 +49,8 @@ PXR_NAMESPACE_USING_DIRECTIVE
 MAYAUSD_PLUGIN_PUBLIC
 MStatus initializePlugin(MObject obj)
 {
+    #error "INTENTIONAL ERROR"
+    
     MStatus status;
     MFnPlugin plugin(obj, "Autodesk", "1.0", "Any");
 
