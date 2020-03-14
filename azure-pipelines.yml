@@ -37,6 +37,10 @@ jobs:
 
        displayName: 'Run build script!'
 
+     - script: 'ctest -C $(BuildType) -VV'
+       workingDirectory: $(BuildFolder)
+       displayName: 'Run ctest!'
+
      # - task: PublishBuildArtifacts@1
      #   inputs:
      #     PathtoPublish: '$(Build.ArtifactStagingDirectory)'
