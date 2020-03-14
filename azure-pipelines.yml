@@ -9,11 +9,9 @@ jobs:
   strategy:
     matrix:
       64-bit Release:
-        BuildType: RelWithDebInfo
-        CMakeArgs: '"Visual Studio 15 2017 Win64"'
-        BuildFolder: '$(Build.BinariesDirectory)\build'
-        InstallFolder: '$(Build.BinariesDirectory)\install'
-        Variant: '--build-relwithdebug'
+        Workspace: '$(Build.BinariesDirectory)\workspace'
+        BuildFolder: '$(Workspace)\build'
+        InstallFolder: '$(Workspace)\install'
 
   steps:
      - task: UsePythonVersion@0
@@ -33,8 +31,7 @@ jobs:
                --devkit-location "C:\Users\hamed\Desktop\PR112_DEVKIT\devkitBase"  
                --stages=clean,configure,build,install
                --build-args="-DSKIP_USDMAYA_TESTS=ON,-DPXR_BUILD_TESTS=OFF"
-               $(InstallFolder)
-
+               $(Workspace)
        displayName: 'Run build script!'
 
      - script: 'ctest -j 4 -C $(BuildType) -VV'
