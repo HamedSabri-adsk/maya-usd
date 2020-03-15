@@ -45,7 +45,7 @@ jobs:
      - task: PublishTestResults@2
        inputs:
           testResultsFormat: 'CTest'
-          testResultsFiles: '**/TEST-*.xml'
+          testResultsFiles: $(BuildFolder)/$(BuildType)/Testing/*/Test.xml
           testRunTitle: $(Agent.JobName)
        condition: succeededOrFailed()
        displayName: Publish test results
