@@ -42,6 +42,11 @@ jobs:
        workingDirectory: $(BuildFolder)/$(BuildType)
        displayName: 'Run ctest!'
 
+     - task: PublishTestResults@2
+       inputs:
+          testResultsFormat: 'CTest'
+          testResultsFiles: '**/TEST-*.xml'
+     
      # - task: PublishBuildArtifacts@1
      #   inputs:
      #     PathtoPublish: '$(Build.ArtifactStagingDirectory)'
