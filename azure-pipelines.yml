@@ -1,0 +1,50 @@
+trigger:
+- azure_pipelines
+pr:
+  branches:
+    include:
+    - '*' 
+jobs:
+- job:
+  displayName: WindowsAgent
+  pool: 'Default'
+
+  strategy:
+    matrix:
+      64-bit Release:
+        Workspace: '$(Build.BinariesDirectory)\workspace'
+        BuildFolder: '$(Workspace)\build'
+        InstallFolder: '$(Workspace)\install'
+        BuildType: RelWithDebInfo
+
+  steps:
+     - task: UsePythonVersion@0
+       inputs:
+        versionSpec: '2.x' 
+        addToPath: true 
+        architecture: 'x64' # Options: x86, x64 (this argument applies only on Windows agents)
+       displayName: Use python 2.7!
+
+     - script: |
+        SET PATH=C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\VC\Tools\MSVC\14.16.27023\bin\HostX64\x64;C:\Program Files\CMake\bin\cmake.exe;%PATH%
+        call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\VC\Auxiliary\Build\vcvars64.bat"
+
+     - script: python build.py 
+               --pxrusd-location "C:\Users\hamed\Desktop\USD2002" 
+               --maya-location "C:\Program Files\Autodesk\Maya2021" 
+               --devkit-location "C:\Users\hamed\Desktop\PR112_DEVKIT\devkitBase"  
+               --stages=clean,configure,build,install
+               --build-args="-DSKIP_USDMAYA_TESTS=ON,-DPXR_BUILD_TESTS=OFF"
+               $(Workspace)
+       displayName: 'Run build script!'
+
+     - script: 'ctest -j 4 -C $(BuildType) -VV'
+       workingDirectory: $(BuildFolder)/$(BuildType)
+       displayName: 'Run ctest!'
+
+     # - task: PublishBuildArtifacts@1
+     #   inputs:
+     #     PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+     #     ArtifactName: 'MayaUSD-0.1.0'
+     #     publishLocation: 'Container'
+     #     parallel: true

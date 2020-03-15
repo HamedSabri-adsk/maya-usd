@@ -102,12 +102,7 @@ def GetVisualStudioCompilerAndVersion():
     return None
 
 def IsVisualStudio2017OrGreater():
-    VISUAL_STUDIO_2017_VERSION = (15, 0)
-    msvcCompilerAndVersion = GetVisualStudioCompilerAndVersion()
-    if msvcCompilerAndVersion:
-        _, version = msvcCompilerAndVersion
-        return version >= VISUAL_STUDIO_2017_VERSION
-    return False
+    return True
 
 def GetCPUCount():
     try:
