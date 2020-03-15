@@ -38,7 +38,7 @@ jobs:
                $(Workspace)
        displayName: 'Run build script!'
 
-     - script: 'ctest -T test'
+     - script: 'ctest -T test -C $(BuildType)'
        workingDirectory: $(BuildFolder)/$(BuildType)
        displayName: 'Run ctest!'
 
