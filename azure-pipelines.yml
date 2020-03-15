@@ -33,12 +33,12 @@ jobs:
                --pxrusd-location "C:\Users\hamed\Desktop\USD2002" 
                --maya-location "C:\Program Files\Autodesk\Maya2021" 
                --devkit-location "C:\Users\hamed\Desktop\PR112_DEVKIT\devkitBase"  
-               --stages=clean,configure,build,install
+               --stages=configure,build,install
                --build-args="-DSKIP_USDMAYA_TESTS=ON,-DPXR_BUILD_TESTS=OFF"
                $(Workspace)
        displayName: 'Run build script!'
 
-     - script: 'ctest -j 4 -C $(BuildType) -VV'
+     - script: 'ctest -T test'
        workingDirectory: $(BuildFolder)/$(BuildType)
        displayName: 'Run ctest!'
 
@@ -46,6 +46,9 @@ jobs:
        inputs:
           testResultsFormat: 'CTest'
           testResultsFiles: '**/TEST-*.xml'
+          testRunTitle: $(Agent.JobName)
+       condition: succeededOrFailed()
+       displayName: Publish test results
      
      # - task: PublishBuildArtifacts@1
      #   inputs:
