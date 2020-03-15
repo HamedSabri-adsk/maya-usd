@@ -15,6 +15,9 @@ static inline double randDouble()
 //----------------------------------------------------------------------------------------------------------------------
 TEST(DiffCore, vec2AreAllTheSame)
 {
+  
+  FAIL() << "I want this test to fail!";
+  
   std::vector<float> a(16 + 4 + 2);
   for(int i = 0; i < 22; i += 2)
   {
