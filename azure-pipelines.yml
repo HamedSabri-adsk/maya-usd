@@ -1,6 +1,9 @@
 trigger:
 - azure_pipelines
-
+pr:
+  branches:
+    include:
+    - '*' 
 jobs:
 - job:
   displayName: WindowsAgent
